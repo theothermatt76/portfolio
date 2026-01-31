@@ -1,0 +1,7 @@
+mysql_root_password: "secure-password"
+app_user: "www-data"
+http_host: "stack.something.com"
+http_conf: "stack.something.conf"
+#http_port: "80"
+https_port: "443"
+disable_default: true
