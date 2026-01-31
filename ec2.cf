@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A simple CloudFormation example to create a single EC2 Instance.
+
+Parameters:
+  ImageId:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+    Description: The AMI ID for the EC2 instance.
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: The EC2 instance type.
+
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      Tags:
+        - Key: Name
+          Value: MyCFExampleInstance
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID of the newly created EC2 instance
+    Value: !Ref MyEC2Instance
+  PublicDns:
+    Description: Public DNS name of the newly created EC2 instance
+    Value: !GetAtt MyEC2Instance.PublicDnsName
