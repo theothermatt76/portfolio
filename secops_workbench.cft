@@ -1,0 +1,54 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS CloudFormation Template to launch a SecOps workstation. For use only by IT Sec SecOps team",
+    "Parameters": {
+        "KeyName": {
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+            "Type": "AWS::EC2::KeyPair::KeyName",
+            "Default": "",
+            "ConstraintDescription": "Must be the name of an existing EC2 KeyPair."
+        },
+        "InstanceType": {
+            "Description": "EC2 instance type",
+            "Type": "String",
+            "Default": "t2.small",
+            "AllowedValues": [
+                "t2.micro",
+                "t2.small",
+                "t2.medium",
+                "t2.large"
+            ],
+            "ConstraintDescription": "Must be a valid EC2 instance type."
+        }
+    },
+    "Resources": {
+        "EC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "InstanceType": {
+                    "Ref": "InstanceType"
+                },
+                "SecurityGroupIds": [
+                    "sg-"
+                ],
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "ImageId": "ami-",
+                "IamInstanceProfile": "",
+                "SubnetId": "subnet-"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "7bc0d7fa-adec-45b0-b766-8118f732240d"
+                }
+            }
+        }
+      },
+    "Outputs": {
+        "PrivateIP": {
+        "Description": "IP address of the newly created EC2 instance",
+        "Value": { "Fn::GetAtt": [ "EC2Instance", "PrivateIp" ]}
+                      }
+                }
+}

@@ -1,0 +1,10 @@
+# Sometimes you need a local Jenkins...just rename and docker-compose up
+version: '2'
+services:
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - '/Users/mattbrister/Downloads/jenkins:/var/jenkins_home'
