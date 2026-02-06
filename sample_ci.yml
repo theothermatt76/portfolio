@@ -1,0 +1,23 @@
+#github ci template, just so I dont forget.
+#.github/workflows/ci.yml (check actions tab.)
+#
+
+name: CI Pipeline
+
+#trigger
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs_on: ubuntu-latest #or whatever...
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node #just do something...
+        uses: actions/setup-node@v4
+        with:
+          node_version: 18
+      - name: Install dependencies
+        run: npm install
